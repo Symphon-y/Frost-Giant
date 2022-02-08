@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Title -->
+    <title>Frost Giant RPT Builder</title>
+
+<!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body>
+
+<!-- Rest Timer -->
+    <div id="countdowntimer">
+        <h2>Rest Timer</h2>
+        H:<input type="number" id="hours"/> 
+        M:<input type="number" id="minutes"/>
+        S:<input type="number" id="seconds"/>
+        <button id="start">Start Timer</button>
+        <div id="display">
+
+        </div>
+    </div>
+
+<!-- Plate Calculator -->
+    <div id="plateCalculator">
+        <h2>Plate Calculator </h2>
+        Barbell Weight (Lbs): <input type = "number" id="BBWeight"/>
+        Target Weight (Lbs): <input type = "number" id="targetWeight"/>
+        <button id="plateCalc">Calculate</button>
+        <div id="pCalcDisplay">
+            <div id ="fortyFive"></div>
+            <div id ="twentyFive"></div>
+            <div id ="ten"></div>
+            <div id="five"></div>
+            <div id="twoAndHalf"></div>
+        </div>
+    </div>
+
+<!-- Program Builder -->
+    <div id="programBuilder">
+        <h2>Program Builder</h2>
+            <div id ="ProgramBuilderInput">
+                Exercise Name: <input type="text" id="exerciseName"/>
+                One Rep Max: <input type="number" id="pBuilderOneRepMax"/>
+                Day of The Week: <select id="pBuilderDayOfWeek" name="pBuilderDayOfWeek">
+                    <option value = "undefined"> </option>
+                    <option value = "Sunday">Sunday</option>
+                    <option value = "Monday">Monday</option>
+                    <option value = "Tuesday">Tuesday</option>
+                    <option value = "Wednesday">Wednesday</option>
+                    <option value = "Thursday">Thursday</option>
+                    <option value = "Friday">Friday</option>
+                    <option value = "Saturday">Saturday</option>
+                    </select>
+                    <button id="pBuilderSubmit">Submit</button>
+
+            </div>
+    </div>
+<!-- Scripts -->
+    <script src = "script.js"></script>
+    <script src = "script.jsx"></script>
+</body>
+</html>
