@@ -129,45 +129,137 @@ function barbellPlateCalculator(targetWeight, barWeight){
 
 // Program Builder | Variables
 var exerciseName = document.getElementById("exerciseName");
-var oneRepMax = document.getElementById("pBuilderOneRepMax")
-var dayOfWeek = document.getElementById("pBuilderDayOfWeek")
+var oneRepMax = document.getElementById("pBuilderOneRepMax");
+var dayOfWeek = document.getElementById("pBuilderDayOfWeek");
+var typeOfMvmnt = document.getElementById("typeOfMvmnt");
 var i = 0
 var programArray = []
+var programArrayForTargetLifts = [];
 
-// Program Builder
-function programBuilder(exercise, onerepmax, dayofweek){
-  
-  
+// Program Builder | Input Information 
+function programBuilder(exercise, onerepmax, dayofweek, typeOfMvmnt){
+
   var lifts = {}
     lifts['Exercise'] = exercise;
     lifts['One Rep Max'] = onerepmax;
     lifts['Day Of The Week'] = dayofweek;
+    lifts['Type of Movement'] = typeOfMvmnt;
 
   programArray[i] = lifts;
   i++
-  console.log(programArray);
+  programScheduleDisplay()
 };
 
-// Program Builder | Schedule Display
-function programScheduleDisplay(){
-
-};
-
-
-
-function callProgramBuilder(){
-  programBuilder(exerciseName, oneRepMax, dayOfWeek);
-  
-}
-function updateOneRepMax(e) {
+function updateOneRepMax(e){
   oneRepMax = Number(e.target.value);
 };
-function updateExerciseName(e) {
+function updateExerciseName(e){
   exerciseName = e.target.value;
 };
 function updateDayOfWeek(e){
   dayOfWeek = e.target.value;
 };
+function updateTypeOfMvmnt(e){
+  typeOfMvmnt = e.target.value;
+};
+function callProgramBuilder(){
+  programBuilder(exerciseName, oneRepMax, dayOfWeek, typeOfMvmnt);
+  // calculateBaselineTargets(programArrayForTargetLifts);
+};
+
+
+// Program Builder | Schedule Display | Variables
+var sunDisplay = document.getElementById("sunDisplay");
+var monDisplay = document.getElementById("monDisplay");
+var tueDisplay = document.getElementById("tueDisplay");
+var wedDisplay = document.getElementById("wedDisplay");
+var thuDisplay = document.getElementById("thuDisplay");
+var friDisplay = document.getElementById("friDisplay");
+var satDisplay = document.getElementById("satDisplay");
+
+// Program Builder | Schedule Display
+function programScheduleDisplay(){
+  var sundayTextDisplay = [];
+  var mondayTextDisplay = [];
+  var tuesdayTextDisplay = [];
+  var wednesdayTextDisplay = [];
+  var thursdayTextDisplay = [];
+  var fridayTextDisplay = [];
+  var saturdayTextDisplay = [];
+
+  for (j = 0; j < programArray.length; j++){
+    if (programArray[j]['Day Of The Week'] === "Sunday"){
+      sundayTextDisplay.push(programArray[j]['Exercise'])
+      var sundayOutput = sundayTextDisplay.join(' ');
+      sunDisplay.textContent = `Sunday: ${sundayOutput}`;
+    };
+
+    if (programArray[j]['Day Of The Week'] === "Monday"){
+      mondayTextDisplay.push(programArray[j]['Exercise'])
+      var mondayOutput = mondayTextDisplay.join(' ');
+      monDisplay.textContent = `Monday: ${mondayOutput}`;
+    };
+
+    if (programArray[j]['Day Of The Week'] === "Tuesday"){
+      tuesdayTextDisplay.push(programArray[j]['Exercise'])
+      var tuesdayOutput = tuesdayTextDisplay.join(' ');
+      tueDisplay.textContent = `Tuesday: ${tuesdayOutput}`;
+    };
+
+    if (programArray[j]['Day Of The Week'] === "Wednesday"){
+      wednesdayTextDisplay.push(programArray[j]['Exercise'])
+      var wednesdayOutput = wednesdayTextDisplay.join(' ');
+      wedDisplay.textContent = `Wednesday: ${wednesdayOutput}`;
+    };
+
+    if (programArray[j]['Day Of The Week'] === "Thursday"){
+      thursdayTextDisplay.push(programArray[j]['Exercise'])
+      var thursdayOutput = thursdayTextDisplay.join(' ');
+      thuDisplay.textContent = `Thursday: ${thursdayOutput}`;
+    };
+
+    if (programArray[j]['Day Of The Week'] === "Friday"){
+      fridayTextDisplay.push(programArray[j]['Exercise'])
+      var fridayOutput = fridayTextDisplay.join(' ');
+      friDisplay.textContent = `Friday: ${fridayOutput}`;
+    };
+
+    if (programArray[j]['Day Of The Week'] === "Saturday"){
+      saturdayTextDisplay.push(programArray[j]['Exercise'])
+      var saturdayOutput = saturdayTextDisplay.join(' ');
+      satDisplay.textContent = `Saturday: ${saturdayOutput}`;
+    } 
+  }
+};
+
+// Lifts Calculator | Variables
+
+// Lifts Calculator
+function calculateBaselineTargets(array){
+  
+  var targetLiftArray = []
+  for (i = 0; i < programArray.length; i++){
+    var heaviestSet = programArray[i]['One Rep Max'] * 0.9;
+    var middleSet = programArray[i]['One Rep Max'] * 0.8;
+    var lightestSet = programArray[i]['One Rep Max'] * 0.7;
+    var heaivestWarmUp = heaviestSet * 0.9;
+    var middleWarmUp = heaviestSet * 0.75;
+    var lightestWarmUp = heaviestSet * 0.6;
+
+    programArray[i]['Exercise'] = {
+      'Warmup 1': lightestWarmUp,
+      'Warmup 2': middleWarmUp,
+      'Warmup 3': heaivestWarmUp,
+      'Heaviest Set': heaviestSet,
+      'Middle Set':middleSet,
+      'Lightest Set':lightestSet,
+    }
+    targetLiftArray.push(programArray[i]['Exercise'])
+  }
+  console.log(targetLiftArray);
+};
+
+
 
 // Event Listeners
 
@@ -186,5 +278,9 @@ function updateDayOfWeek(e){
   dayOfWeek.addEventListener("change", updateDayOfWeek);
   oneRepMax.addEventListener("change", updateOneRepMax);
   exerciseName.addEventListener("change", updateExerciseName);
+  typeOfMvmnt.addEventListener("change", updateTypeOfMvmnt);
   pBuilderSubmit.addEventListener("click", callProgramBuilder);
+  
+  
 
+  
