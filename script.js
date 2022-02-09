@@ -164,7 +164,7 @@ function updateTypeOfMvmnt(e){
 };
 function callProgramBuilder(){
   programBuilder(exerciseName, oneRepMax, dayOfWeek, typeOfMvmnt);
-  // calculateBaselineTargets(programArray);
+  calculateBaselineTargets(programArray);
 };
 
 
@@ -245,16 +245,18 @@ function calculateBaselineTargets(array){
     var heaivestWarmUp = heaviestSet * 0.9;
     var middleWarmUp = heaviestSet * 0.75;
     var lightestWarmUp = heaviestSet * 0.6;
+    var newObj = programArray[i]['Exercise'];
 
-    programArray[i]['Exercise'] = {
-      'Warmup 1': lightestWarmUp,
-      'Warmup 2': middleWarmUp,
-      'Warmup 3': heaivestWarmUp,
-      'Heaviest Set': heaviestSet,
-      'Middle Set':middleSet,
-      'Lightest Set':lightestSet,
-    }
-    targetLiftArray.push(programArray[i]['Exercise'])
+      newObj = {
+        'Warmup 1': lightestWarmUp,
+        'Warmup 2': middleWarmUp,
+        'Warmup 3': heaivestWarmUp,
+        'Heaviest Set': heaviestSet,
+        'Middle Set':middleSet,
+        'Lightest Set':lightestSet,
+      }
+
+    targetLiftArray.push(newObj)
   }
   console.log(targetLiftArray);
 };
