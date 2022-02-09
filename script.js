@@ -164,7 +164,7 @@ function updateTypeOfMvmnt(e){
 };
 function callProgramBuilder(){
   programBuilder(exerciseName, oneRepMax, dayOfWeek, typeOfMvmnt);
-  // calculateBaselineTargets(programArrayForTargetLifts);
+  //calculateBaselineTargets(programArrayForTargetLifts);
 };
 
 
