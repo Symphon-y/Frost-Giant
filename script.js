@@ -3,6 +3,10 @@ var hours = document.getElementById("hours");
 var minutes = document.getElementById("minutes");
 var seconds = document.getElementById("seconds");
 var timerButton = document.getElementById("start")
+const todaysDate = new Date ();
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let dayOfWeek = weekday[d.getDay()];
+
 
  
 // Countdown Timer 
@@ -233,21 +237,24 @@ function programScheduleDisplay(){
 };
 
 // Lifts Calculator | Variables
+var calculatedLifts = {};
 
 // Lifts Calculator
 function calculateBaselineTargets(array){
   
   var targetLiftArray = []
   for (i = 0; i < programArray.length; i++){
+    var liftName = programArray[i]['Exercise'];
     var heaviestSet = programArray[i]['One Rep Max'] * 0.9;
     var middleSet = programArray[i]['One Rep Max'] * 0.8;
     var lightestSet = programArray[i]['One Rep Max'] * 0.7;
     var heaivestWarmUp = heaviestSet * 0.9;
     var middleWarmUp = heaviestSet * 0.75;
     var lightestWarmUp = heaviestSet * 0.6;
-    var newObj = programArray[i]['Exercise'];
+    
 
-      newObj = {
+    calculatedLifts = {
+        'Lift': liftName,
         'Warmup 1': lightestWarmUp,
         'Warmup 2': middleWarmUp,
         'Warmup 3': heaivestWarmUp,
@@ -256,11 +263,14 @@ function calculateBaselineTargets(array){
         'Lightest Set':lightestSet,
       }
 
-    targetLiftArray.push(newObj)
+    targetLiftArray.push(calculatedLifts)
   }
   console.log(targetLiftArray);
 };
 
+// Today's Schedule | Variables
+
+// Today's Schedule 
 
 
 // Event Listeners
