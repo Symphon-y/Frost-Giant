@@ -1,26 +1,82 @@
+// Stop Watch Variables
+let sWDisplay = document.getElementById("SWdisplay");
+let sWseconds = 0
+let minutesDisplay = 0;
+let hoursDisplay = 0;
+let secondsDisplay = seconds;
+let intervalIdStopWatch;
+var SWStartButton = document.getElementById("startSW")
+var SWStopButton = document.getElementById("stopSW")
+var SWResetButton = document.getElementById("resetSW")
+
+// Stop Watch
+function stopwatch(){
+
+    intervalIdStopWatch = setInterval(countTime, 1000)
+};
+
+function countTime(){
+
+  sWseconds++
+
+    if (sWseconds < 59){
+      secondsDisplay = sWseconds;
+    }
+
+    if (sWseconds > 59){
+      secondsDisplay = sWseconds % 60
+    }
+    
+    if (sWseconds > 119 && secondsDisplay === 0){
+      minutesDisplay++
+    }
+
+    if (sWseconds > 119 && minutesDisplay === 60){
+      minutesDisplay = 0
+    }
+
+    if (sWseconds > 119 && minutesDisplay === 0 && secondsDisplay === 0){
+      hoursDisplay++
+    }
+    sWDisplay.textContent = `Hours: ${hoursDisplay} Minutes: ${minutesDisplay} Seconds: ${secondsDisplay}`;
+  }
+
+function stopTimer(){
+  if (intervalIdStopWatch){
+    clearInterval(intervalIdStopWatch)
+  }
+};
+
+function resetTimer(){
+  sWseconds = 0
+  minutesDisplay = 0;
+  hoursDisplay = 0;
+  sWDisplay.textContent = `Hours: 0 Minutes: 0 Seconds: 0`;
+};
+
 // Countdown Timer | Variables
 var hours = document.getElementById("hours");
 var minutes = document.getElementById("minutes");
 var seconds = document.getElementById("seconds");
 var timerButton = document.getElementById("start")
+var SWStartButton = document.getElementById("startSW")
+var SWStopButton = document.getElementById("stopSW")
 const todaysDate = new Date ();
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-let dayOfWeek = weekday[d.getDay()];
+let todaysDayOfWeek = weekday[todaysDate.getDay()];
+let timerTrigger = false;
+var dayOfTheWeekHtml = document.getElementById("dayOfTheWeek")
+dayOfTheWeekHtml.textContent = `Today is ${todaysDayOfWeek}`;
+var ul = document.getElementById("ScheduledLifts");
 
-
- 
 // Countdown Timer 
 function countDownTimer(hours, minutes, seconds){
     // Variables
-    var hoursIsNumber = typeof hours;
-    var minutesIsNumber = typeof minutes;
-    var secondsIsNumber = typeof seconds;
+    timerTrigger = true;
     var inputTimeInSeconds = ((hours * 3600) + (minutes * 60) + seconds);
     var secondsCounter = 59;
     var minutesCounter = 59;
     
-  
-     
   
       // Subtract one second at a time from the user input
       function decrementTime(inputTimeInSeconds){
@@ -64,6 +120,7 @@ function countDownTimer(hours, minutes, seconds){
           displayCountdown.textContent = `Time Remaining : ${hoursConverted} hours ${minutesConverted} minutes and ${secondsConverted} seconds.`;
           
           if (inputTimeInSeconds < 0){
+            timerTrigger = false;
             return;
           } else if (inputTimeInSeconds >= 0){
           return(decrementTime(inputTimeInSeconds));
@@ -89,6 +146,9 @@ function countDownTimer(hours, minutes, seconds){
   };
 
 function callTheTimer(){
+  if (timerTrigger === true){
+    return;
+  }
 countDownTimer(hours, minutes, seconds);
 };
 
@@ -180,6 +240,10 @@ var wedDisplay = document.getElementById("wedDisplay");
 var thuDisplay = document.getElementById("thuDisplay");
 var friDisplay = document.getElementById("friDisplay");
 var satDisplay = document.getElementById("satDisplay");
+var scheduledLifts = document.getElementById("Scheduledlifts");
+var actualLifts = document.getElementById("Actuallifts");
+
+
 
 // Program Builder | Schedule Display
 function programScheduleDisplay(){
@@ -263,17 +327,17 @@ function calculateBaselineTargets(array){
         'Lightest Set':lightestSet,
       }
 
-    targetLiftArray.push(calculatedLifts)
+    targetLiftArray.push(calculatedLifts);
   }
   console.log(targetLiftArray);
 };
 
-// Today's Schedule | Variables
-
-// Today's Schedule 
-
 
 // Event Listeners
+  // Stop Watch
+  SWStartButton.addEventListener("click", stopwatch);
+  SWStopButton.addEventListener("click", stopTimer);
+  SWResetButton.addEventListener("click", resetTimer);
 
   // Rest Timer
   hours.addEventListener("change", updateHoursValue);

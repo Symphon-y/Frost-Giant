@@ -13,6 +13,17 @@
 </head>
 <body>
 
+<!-- Stop Watch -->
+<div id="stopWatch">
+    <h2>Stop Watch</h2>
+    <div id="SWdisplay">
+    </div>
+    <button id="startSW">Start</button>
+    <button id="stopSW">Stop</button>
+    <button id="resetSW">Reset</button>
+
+</div>
+
 <!-- Rest Timer -->
     <div id="countdowntimer">
         <h2>Rest Timer</h2>
@@ -28,7 +39,11 @@
 <!-- Plate Calculator -->
     <div id="plateCalculator">
         <h2>Plate Calculator </h2>
-        Barbell Weight (Lbs): <input type = "number" id="BBWeight"/>
+        Barbell Weight <select type = "number" id="BBWeight">
+            <option id = "BbUndefined" value = "undefined"> </option>
+            <option id = "BbFortyFive" value = "45">45lbs (20.45kg)</option>
+            <option id = "BbFortyFour" value = "44">20kg (44lbs)</option>
+        </select>
         Target Weight (Lbs): <input type = "number" id="targetWeight"/>
         <button id="plateCalc">Calculate</button>
         <div id="pCalcDisplay">
@@ -83,9 +98,10 @@
 
 <!-- Todays Schedule-->
     <div id="todaysSchedule">
-        <div id="dayOfTheWeek"></div>
-        <div id="lifts"></div>
-    </div>
+        <h2 id="dayOfTheWeek"></h2>
+        <ul id="Scheduledlifts">
+            <li class ="scheduledList"></li>
+        </ul>
 
 <!-- Scripts -->
     <script src = "script.js"></script>
