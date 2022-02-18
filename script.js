@@ -59,8 +59,6 @@ var hours = document.getElementById("hours");
 var minutes = document.getElementById("minutes");
 var seconds = document.getElementById("seconds");
 var timerButton = document.getElementById("start")
-var SWStartButton = document.getElementById("startSW")
-var SWStopButton = document.getElementById("stopSW")
 const todaysDate = new Date ();
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let todaysDayOfWeek = weekday[todaysDate.getDay()];
@@ -334,6 +332,7 @@ function calculateBaselineTargets(array){
 
 
 // Event Listeners
+
   // Stop Watch
   SWStartButton.addEventListener("click", stopwatch);
   SWStopButton.addEventListener("click", stopTimer);
